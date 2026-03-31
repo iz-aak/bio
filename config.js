@@ -1,22 +1,22 @@
 const CONFIG = {
-  // --- Identity ---
+  // --- title ---
   name: "Izaak",
   pageTitle: "Izaak",
 
-  // --- Profile Picture (also used as favicon) ---
-  profilePicUrl: "https://placehold.co/200x200",
+  // --- pfp and favicon ---
+  profilePicUrl: "https://i.postimg.cc/1ttJqD1L/blue.jpg",
 
-  // --- Discord (Lanyard) ---
+  // --- uid for lanyard presence ---
   discordUserId: "1329547310887207025",
 
   // --- Last.fm ---
   lastfmUsername: "izaak77",
-  lastfmApiKey: "", // optional, leave empty to use public endpoint
+  lastfmApiKey: "bad27576d6c62d96fc266e38ff5e0546", // done
 
-  // --- GitHub ---
+  // --- github ---
   githubUsername: "iz-aak",
 
-  // --- Reddit ---
+  // --- reddit ---
   redditUsername: "ssprix",
 
   // --- Socials ---
@@ -24,7 +24,7 @@ const CONFIG = {
     { platform: "GitHub",    icon: "github",    handle: "iz-aak",      url: "https://github.com/iz-aak",         showCommit: true },
     { platform: "Twitter/X", icon: "twitter",   handle: "@uhizaak",    url: "https://twitter.com/uhizaak",       showCommit: false },
     { platform: "Instagram", icon: "instagram", handle: "@uh.izaak",   url: "https://instagram.com/uh.izaak",    showCommit: false },
-    { platform: "Discord",   icon: "discord",   handle: "@uh.izaak",   url: null,                                showCommit: false, showPresence: true },
+    { platform: "Discord",   icon: "discord",   handle: "@uh.izaak",   url: "https://discord.com/users/1329547310887207025",                                showCommit: false, showPresence: true },
     { platform: "Reddit",    icon: "reddit",    handle: "ssprix",      url: "https://reddit.com/user/ssprix",    showCommit: false, showKarma: true },
     { platform: "Email",     icon: "mail",      handle: "izaak@cc.cc", url: "mailto:izaak@cc.cc",               showCommit: false },
     { platform: "Copyright / DMCA", icon: "shield", handle: "admin@fluxtv.qzz.io", url: "mailto:admin@fluxtv.qzz.io", showCommit: false },
@@ -52,7 +52,7 @@ const CONFIG = {
     },
     {
       name: "VyrxAI",
-      description: "Web development for VyrxAI",
+      description: "Web developer for VyrxAI",
       status: "live",
       links: [
         { label: "Site",    url: "https://vyrxai.k.vu" },
@@ -61,7 +61,7 @@ const CONFIG = {
     },
     {
       name: "This Site",
-      description: "Personal portfolio and hub",
+      description: "uhhhhh bio site ig",
       status: "live",
       links: [],
       isCurrent: true,
