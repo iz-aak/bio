@@ -451,3 +451,23 @@ footer { text-align: center; padding: 36px 20px; font-size: 0.72rem; color: #2a2
   #nav-pill { padding: 6px 10px; gap: 0; }
   .nav-btn { padding: 6px 8px; }
 }
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity 1s ease, filter 1s ease;
+}
+.scroll-hint.visible { opacity: 1; filter: blur(0); }
+.scroll-hint.hidden { opacity: 0 !important; filter: blur(6px) !important; transition: opacity 0.4s ease, filter 0.4s ease; }
+.scroll-hint svg {
+  width: 28px; height: 28px;
+  color: var(--text-secondary);
+  animation: bounce-soft 2.4s ease-in-out infinite;
+}
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
