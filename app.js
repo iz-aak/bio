@@ -185,7 +185,7 @@ function buildCats() {
 
   section.innerHTML = `
     <div class="section-inner">
-      <h2 class="section-title reveal">Cats 🐱</h2>
+      <h2 class="section-title reveal">Cats ❤️</h2>
       <div class="cats-grid">${grid}</div>
     </div>
   `;
