@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Izaak</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- Geist Mono via CDN -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+    :root { --font-mono: 'Space Mono', monospace; }
+  </style>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV PILL -->
+  <nav id="nav-pill"></nav>
+
+  <!-- HERO -->
+  <section id="hero"></section>
+
+  <!-- ABOUT -->
+  <section id="about"></section>
+
+  <!-- PROJECTS -->
+  <section id="projects"></section>
+
+  <!-- CATS -->
+  <section id="cats"></section>
+
+  <!-- CLOCK -->
+  <section id="clock"></section>
+
+  <!-- SOCIALS -->
+  <section id="socials"></section>
+
+  <footer>
+    <span>© 2025 Izaak · built with ♥</span>
+  </footer>
+
+  <!-- PROJECT MODAL -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal" id="modal"></div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">✕</button>
+    <img src="" alt="Cat" />
+    <div class="lightbox-name"></div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    // Modal backdrop close
+    document.getElementById('modal-backdrop').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    // Lightbox close
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this || e.target.tagName !== 'IMG') closeLightbox();
+    });
+    // Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeModal(); closeLightbox(); }
+    });
+  </script>
+</body>
+</html>
