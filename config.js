@@ -7,10 +7,10 @@ const CONFIG = {
   profilePicUrl: "https://placehold.co/200x200",
 
   // --- Discord (Lanyard) ---
-  discordUserId: "YOUR_DISCORD_USER_ID",
+  discordUserId: "1329547310887207025",
 
   // --- Last.fm ---
-  lastfmUsername: "izaak.77",
+  lastfmUsername: "izaak77",
   lastfmApiKey: "", // optional, leave empty to use public endpoint
 
   // --- GitHub ---
