@@ -96,11 +96,11 @@ const CONFIG = {
 
   // --- Cat Pics ---
   cats: [
-    { url: "https://placehold.co/400x400", name: "Cat 1" },
-    { url: "https://placehold.co/400x500", name: "Cat 2" },
-    { url: "https://placehold.co/500x400", name: "Cat 3" },
-    { url: "https://placehold.co/400x400", name: "Cat 4" },
-    { url: "https://placehold.co/450x450", name: "Cat 5" },
-    { url: "https://placehold.co/400x600", name: "Cat 6" },
+    { url: "https://i.postimg.cc/76kXKjzK/20250927-154236.jpg", name: "❤️" },
+    { url: "https://i.postimg.cc/JhWb8ZhZ/20260221-202453.jpg", name: "❤️" },
+    { url: "https://i.postimg.cc/YCQWd0xS/20260219-125517.jpg", name: "❤️" },
+    { url: "https://i.postimg.cc/pr99zLd6/24116.jpg", name: "❤️" },
+    { url: "https://i.postimg.cc/sgPMp8V7/20260124-224934.jpg", name: "❤️" },
+    { url: "https://i.postimg.cc/c6yJ3722/20251011-205832.jpg", name: "❤️" },
   ],
 };
