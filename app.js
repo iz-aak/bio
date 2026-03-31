@@ -3,11 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
   setFavicon();
   buildNav();
   buildHero();
-  buildAbout();
+  buildSocials();
   buildProjects();
   buildCats();
   buildClock();
-  buildSocials();
   initScrollReveal();
   initNavHighlight();
   startHeroAnimations();
@@ -58,7 +57,6 @@ function buildNav() {
 function initNavHighlight() {
   const sections = NAV_ITEMS.map(n => document.getElementById(n.id)).filter(Boolean);
   const btns = document.querySelectorAll('.nav-btn');
-
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -68,7 +66,6 @@ function initNavHighlight() {
       }
     });
   }, { threshold: 0.4 });
-
   sections.forEach(s => obs.observe(s));
 }
 
@@ -76,11 +73,11 @@ function initNavHighlight() {
 function buildHero() {
   const section = document.getElementById('hero');
   section.innerHTML = `
-    <div class="section-inner" style="display:flex;flex-direction:column;align-items:center;">
-      <h1 class="hero-name">${CONFIG.name}</h1>
+    <div class="section-inner hero-inner">
       <div class="hero-profile-wrap">
         <img class="hero-avatar" src="${CONFIG.profilePicUrl}" alt="${CONFIG.name}" />
       </div>
+      <h1 class="hero-name">${CONFIG.name}</h1>
       <div class="presence-pill" id="presence-pill">
         <span class="presence-dot" id="presence-dot"></span>
         <span id="presence-text">Loading...</span>
@@ -96,7 +93,6 @@ function buildHero() {
           <span></span><span></span><span></span>
         </div>
       </div>
-      <div class="hero-clock" id="hero-clock">00:00:00.000</div>
     </div>
   `;
 }
@@ -105,41 +101,15 @@ function startHeroAnimations() {
   const pill = document.getElementById('nav-pill');
   setTimeout(() => pill.classList.add('visible'), 400);
 
-  const name = document.querySelector('.hero-name');
   const profileWrap = document.querySelector('.hero-profile-wrap');
+  const name = document.querySelector('.hero-name');
   const presencePill = document.getElementById('presence-pill');
   const nowPlaying = document.getElementById('now-playing-card');
-  const heroClock = document.getElementById('hero-clock');
 
-  setTimeout(() => name?.classList.add('visible'), 300);
-  setTimeout(() => profileWrap?.classList.add('visible'), 600);
-  setTimeout(() => presencePill?.classList.add('visible'), 900);
-  setTimeout(() => nowPlaying?.classList.add('visible'), 1150);
-  setTimeout(() => heroClock?.classList.add('visible'), 1400);
-}
-
-/* ===================== ABOUT ===================== */
-function buildAbout() {
-  const section = document.getElementById('about');
-  section.innerHTML = `
-    <div class="section-inner">
-      <h2 class="about-title reveal">About</h2>
-      <div class="chip reveal" id="github-chip">
-        <span class="chip-label">GitHub</span>
-        <span class="chip-value" id="github-commit-text">Loading...</span>
-      </div>
-      <div class="stat-row reveal">
-        <div class="stat-card">
-          <div class="stat-card-label">Reddit Karma</div>
-          <div class="stat-card-value" id="reddit-karma">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-label">GitHub</div>
-          <div class="stat-card-value">@${CONFIG.githubUsername}</div>
-        </div>
-      </div>
-    </div>
-  `;
+  setTimeout(() => profileWrap?.classList.add('visible'), 300);
+  setTimeout(() => name?.classList.add('visible'), 500);
+  setTimeout(() => presencePill?.classList.add('visible'), 750);
+  setTimeout(() => nowPlaying?.classList.add('visible'), 1000);
 }
 
 /* ===================== PROJECTS ===================== */
@@ -160,7 +130,7 @@ function buildProjects() {
 
   section.innerHTML = `
     <div class="section-inner">
-      <h2 class="projects-title reveal">Projects</h2>
+      <h2 class="section-title reveal">Projects</h2>
       <div class="projects-list">${list}</div>
     </div>
   `;
@@ -215,7 +185,7 @@ function buildCats() {
 
   section.innerHTML = `
     <div class="section-inner">
-      <h2 class="cats-title reveal">Cats 🐱</h2>
+      <h2 class="section-title reveal">Cats 🐱</h2>
       <div class="cats-grid">${grid}</div>
     </div>
   `;
@@ -244,7 +214,7 @@ function buildClock() {
   const section = document.getElementById('clock');
   section.innerHTML = `
     <div class="section-inner" style="text-align:center;">
-      <div class="big-clock reveal" id="big-clock">00:00:00<span class="clock-ms">.000</span></div>
+      <div class="big-clock reveal" id="big-clock"><span class="clock-hms">00:00:00</span><span class="clock-ms">.000</span></div>
       <div class="clock-label reveal">United Kingdom</div>
     </div>
   `;
@@ -253,18 +223,15 @@ function buildClock() {
 function startClocks() {
   function tick() {
     const now = new Date();
-    const uk = new Date(now.toLocaleString('en-GB', { timeZone: 'Europe/London' }));
-    const h = String(uk.getHours()).padStart(2, '0');
-    const m = String(uk.getMinutes()).padStart(2, '0');
-    const s = String(uk.getSeconds()).padStart(2, '0');
+    const ukStr = now.toLocaleString('en-GB', { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    const parts = ukStr.split(':');
+    const h = parts[0] || '00';
+    const m = parts[1] || '00';
+    const s = parts[2] || '00';
     const ms = String(now.getMilliseconds()).padStart(3, '0');
-    const str = `${h}:${m}:${s}`;
 
     const bigClock = document.getElementById('big-clock');
-    if (bigClock) bigClock.innerHTML = `${str}<span class="clock-ms">.${ms}</span>`;
-
-    const heroClock = document.getElementById('hero-clock');
-    if (heroClock) heroClock.textContent = `${str}.${ms}`;
+    if (bigClock) bigClock.innerHTML = `<span class="clock-hms">${h}:${m}:${s}</span><span class="clock-ms">.${ms}</span>`;
 
     requestAnimationFrame(tick);
   }
@@ -272,31 +239,49 @@ function startClocks() {
 }
 
 /* ===================== SOCIALS ===================== */
+// Reordered: Discord, Reddit, GitHub first
+const SOCIAL_ORDER = ['discord', 'reddit', 'github', 'twitter', 'instagram', 'mail', 'shield'];
+
 function buildSocials() {
   const section = document.getElementById('socials');
-  const cards = CONFIG.socials.map((s, i) => {
+
+  const sorted = [...CONFIG.socials].sort((a, b) => {
+    const ai = SOCIAL_ORDER.indexOf(a.icon);
+    const bi = SOCIAL_ORDER.indexOf(b.icon);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+
+  const cards = sorted.map((s, i) => {
     const tag = s.url ? 'a' : 'div';
     const attrs = s.url ? `href="${s.url}" target="_blank" rel="noopener"` : '';
+    const originalIndex = CONFIG.socials.indexOf(s);
+
+    let subHtml = '';
+    if (s.showPresence) {
+      subHtml = `<span class="presence-dot" id="social-presence-dot-${originalIndex}"></span><span class="social-sub-text" id="social-sub-${originalIndex}">—</span>`;
+    } else if (s.showKarma) {
+      subHtml = `<span class="social-sub-text" id="social-sub-${originalIndex}">— karma</span>`;
+    } else if (s.showCommit) {
+      subHtml = `<span class="social-sub-text" id="social-sub-${originalIndex}">loading...</span>`;
+    }
+
     return `
-      <${tag} class="social-card" ${attrs} data-social="${i}" style="transition-delay:${i * 0.07}s">
+      <${tag} class="social-card reveal" ${attrs} data-social="${originalIndex}" style="transition-delay:${i * 0.07}s">
         <div class="social-card-left">
           <div class="social-icon">${getSocialIcon(s.icon)}</div>
-          <div>
+          <div class="social-info">
             <div class="social-platform">${s.platform}</div>
-            <div class="social-sub" id="social-sub-${i}">${s.handle}</div>
+            ${subHtml ? `<div class="social-sub">${subHtml}</div>` : ''}
           </div>
         </div>
-        <div class="social-card-right">
-          ${s.showPresence ? `<span class="presence-dot" id="social-presence-dot-${i}"></span>` : ''}
-          <span class="social-handle">${s.handle}</span>
-        </div>
+        <span class="social-handle">${s.handle}</span>
       </${tag}>
     `;
   }).join('');
 
   section.innerHTML = `
     <div class="section-inner">
-      <h2 class="socials-title reveal">Socials</h2>
+      <h2 class="section-title reveal">Socials</h2>
       <div class="socials-list">${cards}</div>
     </div>
   `;
@@ -305,7 +290,7 @@ function buildSocials() {
 /* ===================== LANYARD ===================== */
 async function fetchLanyard() {
   if (!CONFIG.discordUserId || CONFIG.discordUserId === 'YOUR_DISCORD_USER_ID') {
-    updatePresence('offline', 'Discord ID not set');
+    updatePresence('offline', 'Offline');
     return;
   }
   try {
@@ -325,13 +310,15 @@ async function fetchLanyard() {
 function updatePresence(status, text) {
   const dot = document.getElementById('presence-dot');
   const textEl = document.getElementById('presence-text');
-  if (dot) { dot.className = 'presence-dot ' + status; }
+  if (dot) dot.className = 'presence-dot ' + status;
   if (textEl) textEl.textContent = text;
 
   CONFIG.socials.forEach((s, i) => {
     if (s.showPresence) {
       const d = document.getElementById(`social-presence-dot-${i}`);
+      const t = document.getElementById(`social-sub-${i}`);
       if (d) d.className = 'presence-dot ' + status;
+      if (t) t.textContent = text;
     }
   });
 }
@@ -358,7 +345,8 @@ async function fetchNowPlaying() {
     const eq = document.getElementById('np-eq');
     if (eq) eq.className = 'now-playing-eq' + (isNowPlaying ? '' : ' paused');
   } catch (e) {
-    document.getElementById('np-track').textContent = 'Unavailable';
+    const el = document.getElementById('np-track');
+    if (el) el.textContent = 'Unavailable';
   }
 }
 
@@ -369,25 +357,21 @@ async function fetchGitHub() {
     const events = await res.json();
     const pushEvent = events?.find(e => e.type === 'PushEvent');
     if (!pushEvent) {
-      document.getElementById('github-commit-text').textContent = 'No recent commits';
+      const el = document.getElementById('github-commit-text');
+      if (el) el.textContent = 'No recent commits';
       return;
     }
     const commit = pushEvent.payload?.commits?.[pushEvent.payload.commits.length - 1];
     const message = commit?.message?.split('\n')[0] || 'No message';
     const timeAgo = getTimeAgo(new Date(pushEvent.created_at));
-    const text = `${message} · ${timeAgo}`;
-    document.getElementById('github-commit-text').textContent = text;
 
     CONFIG.socials.forEach((s, i) => {
       if (s.showCommit) {
         const sub = document.getElementById(`social-sub-${i}`);
-        if (sub) sub.textContent = `${message.slice(0, 30)}${message.length > 30 ? '…' : ''} · ${timeAgo}`;
+        if (sub) sub.textContent = `${message.slice(0, 28)}${message.length > 28 ? '…' : ''} · ${timeAgo}`;
       }
     });
-  } catch (e) {
-    const el = document.getElementById('github-commit-text');
-    if (el) el.textContent = 'Could not load';
-  }
+  } catch (e) {}
 }
 
 /* ===================== REDDIT ===================== */
@@ -397,8 +381,6 @@ async function fetchReddit() {
     const data = await res.json();
     const karma = (data?.data?.link_karma || 0) + (data?.data?.comment_karma || 0);
     const formatted = karma.toLocaleString();
-    const el = document.getElementById('reddit-karma');
-    if (el) el.textContent = formatted;
 
     CONFIG.socials.forEach((s, i) => {
       if (s.showKarma) {
@@ -406,10 +388,7 @@ async function fetchReddit() {
         if (sub) sub.textContent = `${formatted} karma`;
       }
     });
-  } catch (e) {
-    const el = document.getElementById('reddit-karma');
-    if (el) el.textContent = '—';
-  }
+  } catch (e) {}
 }
 
 /* ===================== SCROLL REVEAL ===================== */
