@@ -93,6 +93,9 @@ function buildHero() {
           <span></span><span></span><span></span>
         </div>
       </div>
+      <div class="scroll-hint" id="scroll-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
     </div>
   `;
 }
@@ -105,11 +108,18 @@ function startHeroAnimations() {
   const name = document.querySelector('.hero-name');
   const presencePill = document.getElementById('presence-pill');
   const nowPlaying = document.getElementById('now-playing-card');
+  const hint = document.getElementById('scroll-hint');
 
   setTimeout(() => profileWrap?.classList.add('visible'), 300);
   setTimeout(() => name?.classList.add('visible'), 500);
   setTimeout(() => presencePill?.classList.add('visible'), 750);
   setTimeout(() => nowPlaying?.classList.add('visible'), 1000);
+  setTimeout(() => hint?.classList.add('visible'), 1400);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) hint?.classList.add('hidden');
+    else hint?.classList.remove('hidden');
+  }, { passive: true });
 }
 
 /* ===================== PROJECTS ===================== */
@@ -229,17 +239,14 @@ function startClocks() {
     const m = parts[1] || '00';
     const s = parts[2] || '00';
     const ms = String(now.getMilliseconds()).padStart(3, '0');
-
     const bigClock = document.getElementById('big-clock');
     if (bigClock) bigClock.innerHTML = `<span class="clock-hms">${h}:${m}:${s}</span><span class="clock-ms">.${ms}</span>`;
-
     requestAnimationFrame(tick);
   }
   tick();
 }
 
 /* ===================== SOCIALS ===================== */
-// Reordered: Discord, Reddit, GitHub first
 const SOCIAL_ORDER = ['discord', 'reddit', 'github', 'twitter', 'instagram', 'mail', 'shield'];
 
 function buildSocials() {
@@ -356,19 +363,40 @@ async function fetchGitHub() {
     const res = await fetch(`https://api.github.com/users/${CONFIG.githubUsername}/events/public`);
     const events = await res.json();
     const pushEvent = events?.find(e => e.type === 'PushEvent');
+
     if (!pushEvent) {
-      const el = document.getElementById('github-commit-text');
-      if (el) el.textContent = 'No recent commits';
+      CONFIG.socials.forEach((s, i) => {
+        if (s.showCommit) {
+          const sub = document.getElementById(`social-sub-${i}`);
+          if (sub) sub.textContent = 'No recent commits';
+        }
+      });
       return;
     }
-    const commit = pushEvent.payload?.commits?.[pushEvent.payload.commits.length - 1];
-    const message = commit?.message?.split('\n')[0] || 'No message';
+
+    const repoName = pushEvent.repo?.name?.split('/')[1] || pushEvent.repo?.name || 'unknown';
     const timeAgo = getTimeAgo(new Date(pushEvent.created_at));
+    const commit = pushEvent.payload?.commits?.[pushEvent.payload.commits.length - 1];
+    let fileText = repoName;
+
+    if (commit?.sha) {
+      try {
+        const commitRes = await fetch(`https://api.github.com/repos/${pushEvent.repo.name}/commits/${commit.sha}`);
+        const commitData = await commitRes.json();
+        const files = commitData?.files;
+        if (files && files.length > 0) {
+          const firstName = files[0].filename.split('/').pop();
+          fileText = files.length > 1
+            ? `${firstName} +${files.length - 1} more`
+            : firstName;
+        }
+      } catch (_) {}
+    }
 
     CONFIG.socials.forEach((s, i) => {
       if (s.showCommit) {
         const sub = document.getElementById(`social-sub-${i}`);
-        if (sub) sub.textContent = `${message.slice(0, 28)}${message.length > 28 ? '…' : ''} · ${timeAgo}`;
+        if (sub) sub.textContent = `${fileText} · ${timeAgo}`;
       }
     });
   } catch (e) {}
