@@ -451,6 +451,9 @@ footer { text-align: center; padding: 36px 20px; font-size: 0.72rem; color: #2a2
   #nav-pill { padding: 6px 10px; gap: 0; }
   .nav-btn { padding: 6px 8px; }
 }
+/* ===================== SCROLL HINT ===================== */
+#hero { position: relative; }
+
 .scroll-hint {
   position: absolute;
   bottom: 32px;
@@ -459,11 +462,17 @@ footer { text-align: center; padding: 36px 20px; font-size: 0.72rem; color: #2a2
   opacity: 0;
   filter: blur(6px);
   transition: opacity 1s ease, filter 1s ease;
+  pointer-events: none;
 }
 .scroll-hint.visible { opacity: 1; filter: blur(0); }
-.scroll-hint.hidden { opacity: 0 !important; filter: blur(6px) !important; transition: opacity 0.4s ease, filter 0.4s ease; }
+.scroll-hint.hidden {
+  opacity: 0 !important;
+  filter: blur(6px) !important;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
 .scroll-hint svg {
-  width: 28px; height: 28px;
+  width: 28px;
+  height: 28px;
   color: var(--text-secondary);
   animation: bounce-soft 2.4s ease-in-out infinite;
 }
