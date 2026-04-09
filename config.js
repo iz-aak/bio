@@ -1,25 +1,25 @@
 const CONFIG = {
-  // --- title ---
+  //  title 
   name: "Izaak",
   pageTitle: "Izaak",
 
-  // --- pfp and favicon ---
+  //  pfp and icon 
   profilePicUrl: "https://i.postimg.cc/1ttJqD1L/blue.jpg",
 
-  // --- uid for lanyard presence ---
+  // uid for lanyard api 
   discordUserId: "1329547310887207025",
 
-  // --- Last.fm ---
+  //  last.fm 
   lastfmUsername: "izaak77",
   lastfmApiKey: "bad27576d6c62d96fc266e38ff5e0546", // done
 
-  // --- github ---
+  //  github 
   githubUsername: "iz-aak",
 
-  // --- reddit ---
+  //  reddit 
   redditUsername: "ssprix",
 
-  // --- Socials ---
+  //  Socials 
   socials: [
     { platform: "GitHub",    icon: "github",    handle: "iz-aak",      url: "https://github.com/iz-aak",         showCommit: true },
     { platform: "Twitter/X", icon: "twitter",   handle: "@uhizaak",    url: "https://twitter.com/uhizaak",       showCommit: false },
@@ -30,7 +30,7 @@ const CONFIG = {
     { platform: "Copyright / DMCA", icon: "shield", handle: "admin@fluxtv.qzz.io", url: "mailto:admin@fluxtv.qzz.io", showCommit: false },
   ],
 
-  // --- Projects ---
+  //  projects 
   projects: [
     {
       name: "FluxTV",
@@ -94,7 +94,7 @@ const CONFIG = {
     },
   ],
 
-  // --- Cat Pics ---
+  //  cats section 
   cats: [
     { url: "https://i.postimg.cc/76kXKjzK/20250927-154236.jpg", name: "❤️" },
     { url: "https://i.postimg.cc/JhWb8ZhZ/20260221-202453.jpg", name: "❤️" },
