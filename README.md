@@ -1,1 +1,18 @@
-# bio
+### to do
+- [x] add icon
+- [x] mobile viewport bug
+- [x] meta tags for embeds
+- [x] bug in app.js causing nothing to render
+- [x] add scroll prompt
+- [ ] add 'rendered in X ms' to top of page
+- [ ] add response in ms instead of active next to projects
+- [ ] change index to a loading page then render EVERYTHING from app.js (with delay?)
+- [ ] add Spotify api for album art
+- [ ] hardcode reddit karma or add manually to config.js
+- [ ] update projects
+- [ ] add hash linking (/#projects or /projects)
+- [ ] add redirect linking with fake delay and loading (eg /discord)
+- [ ] add analytics with cf worker
+- [ ] add cookie dialog after analytics
+- [ ] add view count pulled from worker
+- [ ] change icon
