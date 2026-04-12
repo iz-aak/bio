@@ -16,3 +16,4 @@
 - [ ] add cookie dialog after analytics
 - [ ] add view count pulled from worker
 - [ ] change icon
+- [ ] add placeholders for when last.fm doesnt have a photo
