@@ -18,7 +18,7 @@ const CONFIG = {
   
   //  reddit   
   redditUsername: "ssprix",  
-  redditKarma: 200,193, // hardcoded fallback
+  redditKarma: 200193, // hardcoded fallback
   
   //  structure and linkking   
   socials: [  
