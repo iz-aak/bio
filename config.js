@@ -19,7 +19,7 @@ const CONFIG = {
   //  reddit 
   redditUsername: "ssprix",
 
-  //  Socials 
+  //  structure and linkking 
   socials: [
     { platform: "GitHub",    icon: "github",    handle: "iz-aak",      url: "https://github.com/iz-aak",         showCommit: true },
     { platform: "Twitter/X", icon: "twitter",   handle: "@uhizaak",    url: "https://twitter.com/uhizaak",       showCommit: false },
