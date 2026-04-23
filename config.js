@@ -11,7 +11,7 @@ const CONFIG = {
 
   //  last.fm 
   lastfmUsername: "izaak77",
-  lastfmApiKey: "bad27576d6c62d96fc266e38ff5e0546", // done
+  lastfmApiKey: "bad27576d6c62d96fc266e38ff5e0546",
 
   //  github 
   githubUsername: "iz-aak",
@@ -24,7 +24,7 @@ const CONFIG = {
     { platform: "GitHub",    icon: "github",    handle: "iz-aak",      url: "https://github.com/iz-aak",         showCommit: true },
     { platform: "Twitter/X", icon: "twitter",   handle: "@uhizaak",    url: "https://twitter.com/uhizaak",       showCommit: false },
     { platform: "Instagram", icon: "instagram", handle: "@uh.izaak",   url: "https://instagram.com/uh.izaak",    showCommit: false },
-    { platform: "Discord",   icon: "discord",   handle: "@uh.izaak",   url: "https://discord.com/users/1329547310887207025",                                showCommit: false, showPresence: true },
+    { platform: "Discord",   icon: "discord",   handle: "@uh.izaak",   url: "https://discord.com/users/1329547310887207025", showCommit: false, showPresence: true },
     { platform: "Reddit",    icon: "reddit",    handle: "ssprix",      url: "https://reddit.com/user/ssprix",    showCommit: false, showKarma: true },
     { platform: "Email",     icon: "mail",      handle: "izaak@cc.cc", url: "mailto:izaak@cc.cc",               showCommit: false },
     { platform: "Copyright / DMCA", icon: "shield", handle: "admin@fluxtv.qzz.io", url: "mailto:admin@fluxtv.qzz.io", showCommit: false },
@@ -39,6 +39,22 @@ const CONFIG = {
       links: [
         { label: "Site",   url: "https://fluxtv.qzz.io" },
         { label: "Status", url: "https://rentry.co/fluxtv" },
+      ],
+    },
+    {
+      name: "CineDown",
+      description: "Download 3,000,000+ movies and episodes for free",
+      status: "live",
+      links: [
+        { label: "Site", url: "https://cinedown.xo.je" },
+      ],
+    },
+    {
+      name: "ZXAI",
+      description: "Staff at ZXAI (cheapest sparx autocompleter)",
+      status: "live",
+      links: [
+        { label: "Site", url: "https://zxai.uk" },
       ],
     },
     {
