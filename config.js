@@ -1,122 +1,123 @@
-const CONFIG = {
-  //  title 
-  name: "Izaak",
-  pageTitle: "Izaak",
-
-  //  pfp and icon 
-  profilePicUrl: "https://i.postimg.cc/1ttJqD1L/blue.jpg",
-
-  // uid for lanyard api 
-  discordUserId: "1329547310887207025",
-
-  //  last.fm 
-  lastfmUsername: "izaak77",
-  lastfmApiKey: "bad27576d6c62d96fc266e38ff5e0546",
-
-  //  github 
-  githubUsername: "iz-aak",
-
-  //  reddit 
-  redditUsername: "ssprix",
-
-  //  structure and linkking 
-  socials: [
-    { platform: "GitHub",    icon: "github",    handle: "iz-aak",      url: "https://github.com/iz-aak",         showCommit: true },
-    { platform: "Twitter/X", icon: "twitter",   handle: "@uhizaak",    url: "https://twitter.com/uhizaak",       showCommit: false },
-    { platform: "Instagram", icon: "instagram", handle: "@uh.izaak",   url: "https://instagram.com/uh.izaak",    showCommit: false },
-    { platform: "Discord",   icon: "discord",   handle: "@uh.izaak",   url: "https://discord.com/users/1329547310887207025", showCommit: false, showPresence: true },
-    { platform: "Reddit",    icon: "reddit",    handle: "ssprix",      url: "https://reddit.com/user/ssprix",    showCommit: false, showKarma: true },
-    { platform: "Email",     icon: "mail",      handle: "izaak@cc.cc", url: "mailto:izaak@cc.cc",               showCommit: false },
-    { platform: "Copyright / DMCA", icon: "shield", handle: "admin@fluxtv.qzz.io", url: "mailto:admin@fluxtv.qzz.io", showCommit: false },
-  ],
-
-  //  projects 
-  projects: [
-    {
-      name: "FluxTV",
-      description: "3,000,000+ free movies and shows",
-      status: "live",
-      links: [
-        { label: "Site",   url: "https://fluxtv.qzz.io" },
-        { label: "Status", url: "https://rentry.co/fluxtv" },
-      ],
-    },
-    {
-      name: "CineDown",
-      description: "Download 3,000,000+ movies and episodes for free",
-      status: "live",
-      links: [
-        { label: "Site", url: "https://cinedown.xo.je" },
-      ],
-    },
-    {
-      name: "ZXAI",
-      description: "Staff at ZXAI (cheapest sparx autocompleter)",
-      status: "live",
-      links: [
-        { label: "Site", url: "https://zxai.uk" },
-      ],
-    },
-    {
-      name: "FluxusTV",
-      description: "Legacy FluxTV",
-      status: "live",
-      links: [
-        { label: "Site",   url: "https://fluxustv.vercel.app" },
-        { label: "Status", url: "https://rentry.co/fluxtv" },
-      ],
-    },
-    {
-      name: "VyrxAI",
-      description: "Web developer for VyrxAI",
-      status: "live",
-      links: [
-        { label: "Site",    url: "https://vyrxai.k.vu" },
-        { label: "License", url: "https://vyrxai.k.vu/license" },
-      ],
-    },
-    {
-      name: "This Site",
-      description: "uhhhhh bio site ig",
-      status: "live",
-      links: [],
-      isCurrent: true,
-    },
-    {
-      name: "Temp Email",
-      description: "Disposable email address",
-      status: "live",
-      links: [
-        { label: "Site", url: "https://tempmails.qzz.io" },
-      ],
-    },
-    {
-      name: "Magnet Downloader",
-      description: "Download from .torrent file or magnet link",
-      status: "dev",
-      links: [],
-    },
-    {
-      name: "Torrent Index",
-      description: "Scrapes The Pirate Bay and 1337x for magnet links/torrents",
-      status: "dev",
-      links: [],
-    },
-    {
-      name: "ProxyK",
-      description: "Free web proxy running from the Reflect4 API",
-      status: "dev",
-      links: [],
-    },
-  ],
-
-  //  cats section 
-  cats: [
-    { url: "https://i.postimg.cc/76kXKjzK/20250927-154236.jpg", name: "❤️" },
-    { url: "https://i.postimg.cc/JhWb8ZhZ/20260221-202453.jpg", name: "❤️" },
-    { url: "https://i.postimg.cc/YCQWd0xS/20260219-125517.jpg", name: "❤️" },
-    { url: "https://i.postimg.cc/pr99zLd6/24116.jpg", name: "❤️" },
-    { url: "https://i.postimg.cc/sgPMp8V7/20260124-224934.jpg", name: "❤️" },
-    { url: "https://i.postimg.cc/c6yJ3722/20251011-205832.jpg", name: "❤️" },
-  ],
+const CONFIG = {  
+  //  title   
+  name: "Izaak",  
+  pageTitle: "Izaak",  
+  
+  //  pfp and icon   
+  profilePicUrl: "https://i.postimg.cc/1ttJqD1L/blue.jpg",  
+  
+  // uid for lanyard api   
+  discordUserId: "1329547310887207025",  
+  
+  //  last.fm   
+  lastfmUsername: "izaak77",  
+  lastfmApiKey: "bad27576d6c62d96fc266e38ff5e0546",  
+  
+  //  github   
+  githubUsername: "iz-aak",  
+  
+  //  reddit   
+  redditUsername: "ssprix",  
+  redditKarma: 200,193, // hardcoded fallback
+  
+  //  structure and linkking   
+  socials: [  
+    { platform: "GitHub",    icon: "github",    handle: "iz-aak",      url: "https://github.com/iz-aak",         showCommit: true },  
+    { platform: "Twitter/X", icon: "twitter",   handle: "@uhizaak",    url: "https://twitter.com/uhizaak",       showCommit: false },  
+    { platform: "Instagram", icon: "instagram", handle: "@uh.izaak",   url: "https://instagram.com/uh.izaak",    showCommit: false },  
+    { platform: "Discord",   icon: "discord",   handle: "@uh.izaak",   url: "https://discord.com/users/1329547310887207025", showCommit: false, showPresence: true },  
+    { platform: "Reddit",    icon: "reddit",    handle: "ssprix",      url: "https://reddit.com/user/ssprix",    showCommit: false, showKarma: true },  
+    { platform: "Email",     icon: "mail",      handle: "izaak@cc.cc", url: "mailto:izaak@cc.cc",               showCommit: false },  
+    { platform: "Copyright / DMCA", icon: "shield", handle: "admin@fluxtv.qzz.io", url: "mailto:admin@fluxtv.qzz.io", showCommit: false },  
+  ],  
+  
+  //  projects   
+  projects: [  
+    {  
+      name: "FluxTV",  
+      description: "3,000,000+ free movies and shows",  
+      status: "live",  
+      links: [  
+        { label: "Site",   url: "https://fluxtv.qzz.io" },  
+        { label: "Status", url: "https://rentry.co/fluxtv" },  
+      ],  
+    },  
+    {  
+      name: "CineDown",  
+      description: "Download 3,000,000+ movies and episodes for free",  
+      status: "live",  
+      links: [  
+        { label: "Site", url: "https://cinedown.xo.je" },  
+      ],  
+    },  
+    {  
+      name: "ZXAI",  
+      description: "Staff at ZXAI (cheapest sparx autocompleter)",  
+      status: "live",  
+      links: [  
+        { label: "Site", url: "https://zxai.uk" },  
+      ],  
+    },  
+    {  
+      name: "FluxusTV",  
+      description: "Legacy FluxTV",  
+      status: "live",  
+      links: [  
+        { label: "Site",   url: "https://fluxustv.vercel.app" },  
+        { label: "Status", url: "https://rentry.co/fluxtv" },  
+      ],  
+    },  
+    {  
+      name: "VyrxAI",  
+      description: "Web developer for VyrxAI",  
+      status: "live",  
+      links: [  
+        { label: "Site",    url: "https://vyrxai.k.vu" },  
+        { label: "License", url: "https://vyrxai.k.vu/license" },  
+      ],  
+    },  
+    {  
+      name: "This Site",  
+      description: "uhhhhh bio site ig",  
+      status: "live",  
+      links: [],  
+      isCurrent: true,  
+    },  
+    {  
+      name: "Temp Email",  
+      description: "Disposable email address",  
+      status: "live",  
+      links: [  
+        { label: "Site", url: "https://tempmails.qzz.io" },  
+      ],  
+    },  
+    {  
+      name: "Magnet Downloader",  
+      description: "Download from .torrent file or magnet link",  
+      status: "dev",  
+      links: [],  
+    },  
+    {  
+      name: "Torrent Index",  
+      description: "Scrapes The Pirate Bay and 1337x for magnet links/torrents",  
+      status: "dev",  
+      links: [],  
+    },  
+    {  
+      name: "ProxyK",  
+      description: "Free web proxy running from the Reflect4 API",  
+      status: "dev",  
+      links: [],  
+    },  
+  ],  
+  
+  //  cats section   
+  cats: [  
+    { url: "https://i.postimg.cc/76kXKjzK/20250927-154236.jpg", name: "❤️" },  
+    { url: "https://i.postimg.cc/JhWb8ZhZ/20260221-202453.jpg", name: "❤️" },  
+    { url: "https://i.postimg.cc/YCQWd0xS/20260219-125517.jpg", name: "❤️" },  
+    { url: "https://i.postimg.cc/pr99zLd6/24116.jpg", name: "❤️" },  
+    { url: "https://i.postimg.cc/sgPMp8V7/20260124-224934.jpg", name: "❤️" },  
+    { url: "https://i.postimg.cc/c6yJ3722/20251011-205832.jpg", name: "❤️" },  
+  ],  
 };
