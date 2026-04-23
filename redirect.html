@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting...</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Space+Mono&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --text: #e8e8e8;
+      --text-secondary: #666;
+      --glass-bg: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+      --font-display: 'Montserrat', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* glow */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 36px 36px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      width: 100%;
+      max-width: 380px;
+      margin: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(10px);
+      animation: fadeIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    /* loading spinner */
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid var(--glass-border);
+      border-top-color: rgba(255,255,255,0.6);
+      animation: spin 0.9s linear infinite;
+      margin-bottom: 26px;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .destination {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 22px;
+      line-height: 1.2;
+    }
+
+    .url-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .url-chip svg {
+      width: 10px; height: 10px;
+      stroke: var(--text-secondary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* progress bar */
+    .progress-wrap {
+      width: 100%;
+      height: 2px;
+      background: var(--glass-border);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 999px;
+      animation: progress 3s cubic-bezier(0.4,0,0.2,1) 0.5s forwards;
+    }
+
+    @keyframes progress {
+      0%   { width: 0%; }
+      60%  { width: 75%; }
+      90%  { width: 92%; }
+      100% { width: 100%; }
+    }
+
+    .back-link {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="spinner"></div>
+  <div class="label">Redirecting to</div>
+  <div class="destination" id="dest-name">—</div>
+  <div class="url-chip">
+    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    <span id="dest-url">—</span>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+  <a href="/" class="back-link">← go back</a>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const to = params.get('to');
+
+  if (!to) {
+    window.location.href = '/';
+  } else {
+    // parse name from url
+    const knownNames = {
+      'discord.com':   'Discord',
+      'github.com':    'GitHub',
+      'twitter.com':   'Twitter / X',
+      'x.com':         'Twitter / X',
+      'instagram.com': 'Instagram',
+      'reddit.com':    'Reddit',
+      'mailto:':       'Email',
+    };
+
+    let friendlyName = to;
+    try {
+      const url = new URL(to);
+      const host = url.hostname.replace('www.', '');
+      friendlyName = Object.entries(knownNames).find(([k]) => host.includes(k))?.[1] || host;
+    } catch (_) {
+      // mailto or other
+      if (to.startsWith('mailto:')) friendlyName = 'Email';
+    }
+
+    document.getElementById('dest-name').textContent = friendlyName;
+    document.getElementById('dest-url').textContent = to.length > 48 ? to.slice(0, 48) + '…' : to;
+
+    // redirect after progress bar is complete
+    setTimeout(() => { window.location.href = to; }, 3200);
+  }
+</script>
+
+</body>
+</html>
