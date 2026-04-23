@@ -260,7 +260,8 @@ function buildSocials() {
 
   const cards = sorted.map((s, i) => {
     const tag = s.url ? 'a' : 'div';
-    const attrs = s.url ? `href="${s.url}" target="_blank" rel="noopener"` : '';
+    // Line updated below to use redirect wrapper and URI encoding
+    const attrs = s.url ? `href="/redirect?to=${encodeURIComponent(s.url)}" target="_blank" rel="noopener"` : '';
     const originalIndex = CONFIG.socials.indexOf(s);
 
     let subHtml = '';
