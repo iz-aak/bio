@@ -197,31 +197,40 @@
   if (!to) {
     window.location.href = '/';
   } else {
-    // parse name from url
+    // Known names for socials AND your specific projects
     const knownNames = {
-      'discord.com':   'Discord',
-      'github.com':    'GitHub',
-      'twitter.com':   'Twitter / X',
-      'x.com':         'Twitter / X',
-      'instagram.com': 'Instagram',
-      'reddit.com':    'Reddit',
-      'mailto:':       'Email',
+      'discord.com':       'Discord',
+      'github.com':        'GitHub',
+      'twitter.com':       'Twitter / X',
+      'x.com':             'Twitter / X',
+      'instagram.com':     'Instagram',
+      'reddit.com':        'Reddit',
+      'mailto:':           'Email',
+      'fluxtv.qzz.io':     'FluxTV',
+      'fluxustv.vercel.app':'FluxusTV',
+      'cinedown.xo.je':    'CineDown',
+      'zxai.uk':           'ZXAI',
+      'vyrxai.k.vu':       'VyrxAI',
+      'tempmails.qzz.io':  'Temp Email',
+      'rentry.co':         'Status Page'
     };
 
     let friendlyName = to;
     try {
       const url = new URL(to);
       const host = url.hostname.replace('www.', '');
-      friendlyName = Object.entries(knownNames).find(([k]) => host.includes(k))?.[1] || host;
+      
+      // Exact match check first, then partial
+      friendlyName = knownNames[host] || 
+                     Object.entries(knownNames).find(([k]) => host.includes(k))?.[1] || 
+                     host;
     } catch (_) {
-      // mailto or other
       if (to.startsWith('mailto:')) friendlyName = 'Email';
     }
 
     document.getElementById('dest-name').textContent = friendlyName;
     document.getElementById('dest-url').textContent = to.length > 48 ? to.slice(0, 48) + '…' : to;
 
-    // redirect after progress bar is complete
     setTimeout(() => { window.location.href = to; }, 3200);
   }
 </script>
