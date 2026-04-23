@@ -160,7 +160,7 @@ function openProjectModal(index) {
     linksHtml = `<span class="modal-current">You're already here ✦</span>`;
   } else if (p.links && p.links.length > 0) {
     linksHtml = p.links.map(l => `
-      <a class="modal-link" href="${l.url}" target="_blank" rel="noopener">
+      <a class="modal-link" href="/redirect?to=${encodeURIComponent(l.url)}" target="_blank" rel="noopener">
         ${svgExternalLink()} ${l.label}
       </a>
     `).join('');
@@ -260,7 +260,6 @@ function buildSocials() {
 
   const cards = sorted.map((s, i) => {
     const tag = s.url ? 'a' : 'div';
-    // Line updated below to use redirect wrapper and URI encoding
     const attrs = s.url ? `href="/redirect?to=${encodeURIComponent(s.url)}" target="_blank" rel="noopener"` : '';
     const originalIndex = CONFIG.socials.indexOf(s);
 
@@ -405,19 +404,27 @@ async function fetchGitHub() {
 
 /* ===================== REDDIT ===================== */
 async function fetchReddit() {
+  // Check for hardcoded karma in CONFIG first
+  if (CONFIG.redditKarma !== undefined) {
+    updateRedditUI(CONFIG.redditKarma.toLocaleString());
+    return;
+  }
+
   try {
     const res = await fetch(`https://www.reddit.com/user/${CONFIG.redditUsername}/about.json`);
     const data = await res.json();
     const karma = (data?.data?.link_karma || 0) + (data?.data?.comment_karma || 0);
-    const formatted = karma.toLocaleString();
-
-    CONFIG.socials.forEach((s, i) => {
-      if (s.showKarma) {
-        const sub = document.getElementById(`social-sub-${i}`);
-        if (sub) sub.textContent = `${formatted} karma`;
-      }
-    });
+    updateRedditUI(karma.toLocaleString());
   } catch (e) {}
+}
+
+function updateRedditUI(karmaString) {
+  CONFIG.socials.forEach((s, i) => {
+    if (s.showKarma) {
+      const sub = document.getElementById(`social-sub-${i}`);
+      if (sub) sub.textContent = `${karmaString} karma`;
+    }
+  });
 }
 
 /* ===================== SCROLL REVEAL ===================== */
