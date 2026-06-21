@@ -1,10 +1,8 @@
-# dont process unnecessary files 
+
 exclude:
   - TODO.md
 
-# fix dc verification
 include:
   - .well-known
 
-# pretty urls
 permalink: pretty
