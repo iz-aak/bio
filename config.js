@@ -1,7 +1,7 @@
 const CONFIG = {  
   //  title   
-  name: "Izaak",  
-  pageTitle: "Izaak",  
+  name: "!i",  
+  pageTitle: "!i",  
   
   //  pfp and icon   
   profilePicUrl: "https://i.postimg.cc/1ttJqD1L/blue.jpg",  
